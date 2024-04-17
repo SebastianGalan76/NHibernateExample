@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using NHibernateExample.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace NHibernateExample.Repositories {
     internal class ClientRepository {
