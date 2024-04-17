@@ -25,10 +25,13 @@
         private void InitializeComponent() {
             btnClients = new Button();
             btnBooks = new Button();
-            panel1 = new Panel();
+            pClients = new Panel();
+            vSearchLastName = new TextBox();
+            vSearchFirstName = new TextBox();
             btnAddClient = new Button();
             dgvClients = new DataGridView();
-            panel1.SuspendLayout();
+            vSearchEmail = new TextBox();
+            pClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
             SuspendLayout();
             // 
@@ -51,14 +54,33 @@
             btnBooks.Text = "Books";
             btnBooks.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // pClients
             // 
-            panel1.Controls.Add(btnAddClient);
-            panel1.Controls.Add(dgvClients);
-            panel1.Location = new Point(12, 58);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(776, 380);
-            panel1.TabIndex = 2;
+            pClients.Controls.Add(vSearchEmail);
+            pClients.Controls.Add(vSearchLastName);
+            pClients.Controls.Add(vSearchFirstName);
+            pClients.Controls.Add(btnAddClient);
+            pClients.Controls.Add(dgvClients);
+            pClients.Location = new Point(12, 58);
+            pClients.Name = "pClients";
+            pClients.Size = new Size(776, 380);
+            pClients.TabIndex = 2;
+            // 
+            // vSearchLastName
+            // 
+            vSearchLastName.Location = new Point(336, 73);
+            vSearchLastName.Name = "vSearchLastName";
+            vSearchLastName.Size = new Size(138, 23);
+            vSearchLastName.TabIndex = 3;
+            vSearchLastName.TextChanged += vSearch_TextChanged;
+            // 
+            // vSearchFirstName
+            // 
+            vSearchFirstName.Location = new Point(187, 73);
+            vSearchFirstName.Name = "vSearchFirstName";
+            vSearchFirstName.Size = new Size(143, 23);
+            vSearchFirstName.TabIndex = 2;
+            vSearchFirstName.TextChanged += vSearch_TextChanged;
             // 
             // btnAddClient
             // 
@@ -72,25 +94,37 @@
             // 
             // dgvClients
             // 
+            dgvClients.AllowUserToAddRows = false;
+            dgvClients.AllowUserToDeleteRows = false;
+            dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClients.Location = new Point(3, 98);
             dgvClients.Name = "dgvClients";
+            dgvClients.ReadOnly = true;
             dgvClients.RowTemplate.Height = 25;
             dgvClients.Size = new Size(621, 279);
             dgvClients.TabIndex = 0;
+            // 
+            // vSearchEmail
+            // 
+            vSearchEmail.Location = new Point(480, 74);
+            vSearchEmail.Name = "vSearchEmail";
+            vSearchEmail.Size = new Size(144, 23);
+            vSearchEmail.TabIndex = 4;
+            vSearchEmail.TextChanged += vSearch_TextChanged;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(panel1);
+            Controls.Add(pClients);
             Controls.Add(btnBooks);
             Controls.Add(btnClients);
             Name = "MainForm";
             Text = "Form1";
-            Load += Form1_Load;
-            panel1.ResumeLayout(false);
+            pClients.ResumeLayout(false);
+            pClients.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();
             ResumeLayout(false);
         }
@@ -99,8 +133,11 @@
 
         private Button btnClients;
         private Button btnBooks;
-        private Panel panel1;
+        private Panel pClients;
         private DataGridView dgvClients;
         private Button btnAddClient;
+        private TextBox vSearchFirstName;
+        private TextBox vSearchLastName;
+        private TextBox vSearchEmail;
     }
 }
