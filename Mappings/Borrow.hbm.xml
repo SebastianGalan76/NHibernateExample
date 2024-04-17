@@ -2,13 +2,15 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
 				   namespace="NHibernateExample.Models"
 				   assembly="NHibernateExample">
-	<class name="Borrow" table="Borrow">
-		<id name="ID" column="ID">
-			<generator class="identity" />
+	<class name="Borrow" table="public.&quot;Borrow&quot;">
+		<id name="ID" column="id">
+			<generator class="sequence">
+				<param name="sequence">"Borrow_ID_seq"</param>
+			</generator>
 		</id>
-		<property name="ClientID" />
-		<property name="BookID" />
-		<property name="BorrowDate" />
-		<property name="ReturnDate" />
+		<property name="ClientID" column="client_id"/>
+		<property name="BookID" column="book_id"/>
+		<property name="BorrowDate" column="borrow_date"/>
+		<property name="ReturnDate" column="return_date"/>
 	</class>
 </hibernate-mapping>

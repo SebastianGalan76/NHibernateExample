@@ -2,12 +2,14 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
 				   namespace="NHibernateExample.Models" 
 				   assembly="NHibernateExample">
-	<class name="Client" table="Client">
-		<id name="ID" column="ID">
-			<generator class="identity" />
+	<class name="Client" table="public.&quot;Client&quot;">
+		<id name="ID" column="id">
+			<generator class="sequence">
+				<param name="sequence">"Client_ID_seq"</param>
+			</generator>
 		</id>
-		<property name="FirstName" />
-		<property name="LastName" />
-		<property name="Email" />
+		<property name="FirstName" column="first_name"/>
+		<property name="LastName" column="last_name"/>
+		<property name="Email" column="email"/>
 	</class>
 </hibernate-mapping>
