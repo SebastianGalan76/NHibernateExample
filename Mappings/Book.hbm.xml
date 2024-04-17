@@ -11,5 +11,9 @@
 		<property name="ISBN" column="isbn"/>
 		<property name="Title" column="title"/>
 		<property name="Author" column="author"/>
+		<bag name="Borrows" cascade="all">
+			<key column="book_id"/>
+			<one-to-many class="Borrow"/>
+		</bag>
 	</class>
 </hibernate-mapping>

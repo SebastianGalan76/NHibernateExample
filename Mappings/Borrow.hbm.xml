@@ -8,8 +8,10 @@
 				<param name="sequence">"Borrow_ID_seq"</param>
 			</generator>
 		</id>
-		<property name="ClientID" column="client_id"/>
-		<property name="BookID" column="book_id"/>
+		
+		<many-to-one name="Client" column="client_id" />
+		<many-to-one name="Book" column="book_id" />
+		
 		<property name="BorrowDate" column="borrow_date"/>
 		<property name="ReturnDate" column="return_date"/>
 	</class>
