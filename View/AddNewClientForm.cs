@@ -1,22 +1,18 @@
-﻿using NHibernateExample.Models;
-using NHibernateExample.Repositories;
+﻿using NHibernateExample.Container;
+using NHibernateExample.Models;
 
 namespace NHibernateExample {
     public partial class AddNewClientForm : Form {
-        private ClientRepository mClientRepository;
-        private IList<Client> mClients;
-        private DataGridView mDataGridView;
+        private ClientContainer mClientContainer;
 
-        internal AddNewClientForm(ClientRepository clientRepository, IList<Client> clients, DataGridView dataGridView) {
+        internal AddNewClientForm(ClientContainer clientContainer) {
             InitializeComponent();
 
-            mClientRepository = clientRepository;
-            mClients = clients;
-            mDataGridView = dataGridView;
+            mClientContainer = clientContainer;
         }
 
         private bool ValidateEmail(string email) {
-            if(mClients.Where(c => c.Email == email).Any()) {
+            if(mClientContainer.GetClients().Where(c => c.Email == email).Any()) {
                 MessageBox.Show("There is a client with the provided email address!", "OK");
                 return false;
             }
@@ -56,14 +52,8 @@ namespace NHibernateExample {
             if(!ValidateEmail(email)) {
                 return;
             }
-            
-            Client newClient = new Client { FirstName = firstName, LastName = lastName, Email = email };
-            mClientRepository.SaveOrUpdate(newClient);
-            mClients.Add(newClient);
-            mDataGridView.DataSource = null;
-            mDataGridView.DataSource = mClients;
-            mDataGridView.Refresh();
 
+            mClientContainer.AddClient(new Client { FirstName = firstName, LastName = lastName, Email = email });
             Hide();
         }
         private void btnCancel_Click(object sender, EventArgs e) {

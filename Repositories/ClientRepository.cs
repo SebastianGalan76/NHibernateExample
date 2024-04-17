@@ -1,6 +1,5 @@
 ﻿using NHibernate;
 using NHibernateExample.Models;
-using System.Diagnostics.CodeAnalysis;
 
 namespace NHibernateExample.Repositories {
     internal class ClientRepository {
@@ -34,7 +33,10 @@ namespace NHibernateExample.Repositories {
         }
 
         public void Delete(Client client) {
-            mSession.Delete(client);
+            using(var transaction = mSession.BeginTransaction()) {
+                mSession.Delete(client);
+                transaction.Commit();
+            }
         }
     }
 }

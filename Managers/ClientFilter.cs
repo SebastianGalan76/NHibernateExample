@@ -1,9 +1,10 @@
-﻿using NHibernateExample.Models;
+﻿using NHibernateExample.Container;
+using NHibernateExample.Models;
 
 namespace NHibernateExample.Managers {
     internal class ClientFilter {
-        public IList<Client> GetFilteredClientList(IList<Client> allClients,string firstName, string lastName, string email) {
-            return allClients.Where(c => 
+        public IList<Client> GetFilteredClientList(ClientContainer clientContainer,string firstName, string lastName, string email) {
+            return clientContainer.GetClients().Where(c => 
                 FirstNamePredicate(c, firstName)
                 && LastNamePredicate(c, lastName)
                 && EmailPredicate(c, email))

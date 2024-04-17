@@ -114,6 +114,7 @@
             dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClients.Columns.AddRange(new DataGridViewColumn[] { ID, FirstName, LastName, Email, Manage, Borrows });
+            dgvClients.CellContentClick += DgvClients_ManageClientClick;
             dgvClients.Location = new Point(3, 98);
             dgvClients.MultiSelect = false;
             dgvClients.Name = "dgvClients";

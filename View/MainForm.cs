@@ -1,45 +1,27 @@
-﻿using NHibernate;
+﻿using NHibernateExample.Container;
 using NHibernateExample.Managers;
 using NHibernateExample.Models;
-using NHibernateExample.Repositories;
 using NHibernateExample.View;
-using static NHibernate.Cfg.Mappings;
 
 namespace NHibernateExample {
     public partial class MainForm : Form {
-        private readonly ClientRepository mClientRepository;
+        private readonly ClientContainer mClientContainer;
 
         private ClientFilter mClientFilter = new();
-        private IList<Client> mAllClients;
-        private IList<Client> mClients;
 
         public MainForm() {
             InitializeComponent();
 
-            ISession session = DatabaseSessionManager.OpenSession();
-            mClientRepository = new ClientRepository(session);
-
-            mAllClients = new List<Client>();
-            mClients = new List<Client>();
+            mClientContainer = new ClientContainer(RefreshDataGrid);
 
             LoadClients();
         }
 
         private void LoadClients() {
-            mAllClients = mClientRepository.GetClients();
-            foreach(var client in mAllClients) {
-                mClients.Add(client);
-            }
-
-            dgvClients.DataSource = mClients;
+            RefreshDataGrid(mClientContainer.GetClients());
         }
 
-        private void RefreshClients(IList<Client> clients) {
-            mClients.Clear();
-            foreach(var client in clients) {
-                mClients.Add(client);
-            }
-
+        private void RefreshDataGrid(IList<Client> clients) {
             List<DataGridViewColumn> savedColumns = new List<DataGridViewColumn>();
             string[] columnOrder = new string[] { "ID", "FirstName", "LastName", "Email", "Manage" };
             foreach(DataGridViewColumn column in dgvClients.Columns) {
@@ -47,7 +29,7 @@ namespace NHibernateExample {
             }
 
             dgvClients.DataSource = null;
-            dgvClients.DataSource = mClients;
+            dgvClients.DataSource = clients;
 
             dgvClients.Columns.Clear();
             foreach(DataGridViewColumn column in savedColumns) {
@@ -68,13 +50,24 @@ namespace NHibernateExample {
         }
 
         private void btnAddClient_Click(object sender, EventArgs e) {
-            AddNewClientForm form = new AddNewClientForm(mClientRepository, mAllClients, dgvClients);
+            AddNewClientForm form = new AddNewClientForm(mClientContainer);
             form.ShowDialog();
         }
 
         private void vSearch_TextChanged(object sender, EventArgs e) {
-            IList<Client> foundedClients = mClientFilter.GetFilteredClientList(mAllClients, vSearchFirstName.Text, vSearchLastName.Text, vSearchEmail.Text);
-            RefreshClients(foundedClients);
+            IList<Client> foundedClients = mClientFilter.GetFilteredClientList(mClientContainer, vSearchFirstName.Text, vSearchLastName.Text, vSearchEmail.Text);
+            RefreshDataGrid(foundedClients);
+        }
+
+        private void DgvClients_ManageClientClick(object sender, DataGridViewCellEventArgs e) {
+            if(e.ColumnIndex == dgvClients.Columns["Manage"].Index && e.RowIndex >= 0) {
+                Client selectedClient = dgvClients.Rows[e.RowIndex].DataBoundItem as Client;
+
+                if(selectedClient != null) {
+                    ClientForm form = new ClientForm(selectedClient, mClientContainer);
+                    form.ShowDialog();
+                }
+            }
         }
     }
 }
