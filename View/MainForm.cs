@@ -2,6 +2,7 @@ using NHibernate;
 using NHibernateExample.Managers;
 using NHibernateExample.Models;
 using NHibernateExample.Repositories;
+using NHibernateExample.View;
 
 namespace NHibernateExample {
     public partial class MainForm : Form {
@@ -43,6 +44,11 @@ namespace NHibernateExample {
         private void vSearch_TextChanged(object sender, EventArgs e) {
             IList<Client> foundedClients = mClientFilter.GetFilteredClientList(mClients, vSearchFirstName.Text, vSearchLastName.Text, vSearchEmail.Text);
             RefreshClients(foundedClients);
+        }
+
+        private void btnBooks_Click(object sender, EventArgs e) {
+            ClientForm form = new ClientForm(mClients.FirstOrDefault());
+            form.ShowDialog();
         }
     }
 }

@@ -32,5 +32,9 @@ namespace NHibernateExample.Repositories {
         public IList<Client> GetClients() {
             return mSession.Query<Client>().ToList();
         }
+
+        public void Delete(Client client) {
+            mSession.Delete(client);
+        }
     }
 }

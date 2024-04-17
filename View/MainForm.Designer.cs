@@ -26,11 +26,11 @@
             btnClients = new Button();
             btnBooks = new Button();
             pClients = new Panel();
+            vSearchEmail = new TextBox();
             vSearchLastName = new TextBox();
             vSearchFirstName = new TextBox();
             btnAddClient = new Button();
             dgvClients = new DataGridView();
-            vSearchEmail = new TextBox();
             pClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
             SuspendLayout();
@@ -53,6 +53,7 @@
             btnBooks.TabIndex = 1;
             btnBooks.Text = "Books";
             btnBooks.UseVisualStyleBackColor = true;
+            btnBooks.Click += btnBooks_Click;
             // 
             // pClients
             // 
@@ -65,6 +66,14 @@
             pClients.Name = "pClients";
             pClients.Size = new Size(776, 380);
             pClients.TabIndex = 2;
+            // 
+            // vSearchEmail
+            // 
+            vSearchEmail.Location = new Point(480, 74);
+            vSearchEmail.Name = "vSearchEmail";
+            vSearchEmail.Size = new Size(144, 23);
+            vSearchEmail.TabIndex = 4;
+            vSearchEmail.TextChanged += vSearch_TextChanged;
             // 
             // vSearchLastName
             // 
@@ -104,14 +113,6 @@
             dgvClients.RowTemplate.Height = 25;
             dgvClients.Size = new Size(621, 279);
             dgvClients.TabIndex = 0;
-            // 
-            // vSearchEmail
-            // 
-            vSearchEmail.Location = new Point(480, 74);
-            vSearchEmail.Name = "vSearchEmail";
-            vSearchEmail.Size = new Size(144, 23);
-            vSearchEmail.TabIndex = 4;
-            vSearchEmail.TextChanged += vSearch_TextChanged;
             // 
             // MainForm
             // 
