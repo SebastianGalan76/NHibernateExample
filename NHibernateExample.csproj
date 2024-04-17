@@ -9,7 +9,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Mappings\Book.hbm.xml" />
+    <None Remove="Mappings\Borrow.hbm.xml" />
+    <None Remove="Mappings\Client.hbm.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Book.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Borrow.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Client.hbm.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Nhibernate" Version="5.5.1" />
+    <PackageReference Include="Npgsql" Version="8.0.2" />
   </ItemGroup>
 
 </Project>
