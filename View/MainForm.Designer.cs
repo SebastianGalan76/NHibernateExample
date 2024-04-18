@@ -1,4 +1,6 @@
-﻿namespace NHibernateExample {
+﻿using NHibernateExample.Models;
+
+namespace NHibernateExample {
     partial class MainForm {
         /// <summary>
         ///  Required designer variable.
@@ -23,6 +25,7 @@
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             btnClients = new Button();
             btnBooks = new Button();
@@ -32,14 +35,24 @@
             vSearchFirstName = new TextBox();
             btnAddClient = new Button();
             dgvClients = new DataGridView();
-            ID = new DataGridViewTextBoxColumn();
-            FirstName = new DataGridViewTextBoxColumn();
-            LastName = new DataGridViewTextBoxColumn();
-            Email = new DataGridViewTextBoxColumn();
-            Manage = new DataGridViewButtonColumn();
-            Borrows = new DataGridViewTextBoxColumn();
+            Client_ID = new DataGridViewTextBoxColumn();
+            Client_FirstName = new DataGridViewTextBoxColumn();
+            Client_LastName = new DataGridViewTextBoxColumn();
+            Client_Email = new DataGridViewTextBoxColumn();
+            Client_Manage = new DataGridViewButtonColumn();
+            pBooks = new Panel();
+            btnAddBook = new Button();
+            dgvBooks = new DataGridView();
+            Book_ID = new DataGridViewTextBoxColumn();
+            Book_ISBN = new DataGridViewTextBoxColumn();
+            Book_Title = new DataGridViewTextBoxColumn();
+            Book_Author = new DataGridViewTextBoxColumn();
+            Book_Available = new DataGridViewCheckBoxColumn();
+            Book_Manage = new DataGridViewButtonColumn();
             pClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
+            pBooks.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             SuspendLayout();
             // 
             // btnClients
@@ -60,9 +73,11 @@
             btnBooks.TabIndex = 1;
             btnBooks.Text = "Books";
             btnBooks.UseVisualStyleBackColor = true;
+            btnBooks.Click += btnBooks_Click;
             // 
             // pClients
             // 
+            pClients.BackColor = SystemColors.Control;
             pClients.Controls.Add(vSearchEmail);
             pClients.Controls.Add(vSearchLastName);
             pClients.Controls.Add(vSearchFirstName);
@@ -72,6 +87,7 @@
             pClients.Name = "pClients";
             pClients.Size = new Size(776, 380);
             pClients.TabIndex = 2;
+            pClients.Visible = false;
             // 
             // vSearchEmail
             // 
@@ -113,8 +129,7 @@
             dgvClients.AllowUserToDeleteRows = false;
             dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClients.Columns.AddRange(new DataGridViewColumn[] { ID, FirstName, LastName, Email, Manage });
-            dgvClients.CellContentClick += dgvClients_ManageClientClick;
+            dgvClients.Columns.AddRange(new DataGridViewColumn[] {Client_ID, Client_FirstName, Client_LastName, Client_Email, Client_Manage });
             dgvClients.AutoGenerateColumns = false;
             dgvClients.Location = new Point(3, 98);
             dgvClients.MultiSelect = false;
@@ -123,56 +138,148 @@
             dgvClients.RowTemplate.Height = 25;
             dgvClients.Size = new Size(770, 279);
             dgvClients.TabIndex = 0;
+            dgvClients.CellContentClick += dgvClients_ManageClientClick;
             // 
             // ID
             // 
-            ID.DataPropertyName = "ID";
-            ID.FillWeight = 40F;
-            ID.HeaderText = "ID";
-            ID.Name = "ID";
-            ID.ReadOnly = true;
+            Client_ID.DataPropertyName = "ID";
+            Client_ID.FillWeight = 40F;
+            Client_ID.HeaderText = "ID";
+            Client_ID.Name = "Client_ID";
+            Client_ID.ReadOnly = true;
             // 
             // FirstName
             // 
-            FirstName.DataPropertyName = "FirstName";
-            FirstName.HeaderText = "First Name";
-            FirstName.Name = "FirstName";
-            FirstName.ReadOnly = true;
+            Client_FirstName.DataPropertyName = "FirstName";
+            Client_FirstName.HeaderText = "First Name";
+            Client_FirstName.Name = "Client_FirstName";
+            Client_FirstName.ReadOnly = true;
             // 
             // LastName
             // 
-            LastName.DataPropertyName = "LastName";
-            LastName.HeaderText = "Last Name";
-            LastName.Name = "LastName";
-            LastName.ReadOnly = true;
+            Client_LastName.DataPropertyName = "LastName";
+            Client_LastName.HeaderText = "Last Name";
+            Client_LastName.Name = "Client_LastName";
+            Client_LastName.ReadOnly = true;
             // 
             // Email
             // 
-            Email.DataPropertyName = "Email";
-            Email.HeaderText = "Email";
-            Email.Name = "Email";
-            Email.ReadOnly = true;
+            Client_Email.DataPropertyName = "Email";
+            Client_Email.HeaderText = "Client_Email";
+            Client_Email.Name = "Email";
+            Client_Email.ReadOnly = true;
             // 
-            // Manage
+            // Client_Manage
             // 
-            Manage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Client_Manage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.Transparent;
+            dataGridViewCellStyle1.ForeColor = Color.Gray;
+            Client_Manage.DefaultCellStyle = dataGridViewCellStyle1;
+            Client_Manage.FillWeight = 50F;
+            Client_Manage.HeaderText = "Manage";
+            Client_Manage.Name = "Client_Manage";
+            Client_Manage.ReadOnly = true;
+            Client_Manage.Text = "Manage";
+            Client_Manage.ToolTipText = "Manage";
+            Client_Manage.UseColumnTextForButtonValue = true;
+            // 
+            // pBooks
+            // 
+            pBooks.BackColor = SystemColors.Control;
+            pBooks.Controls.Add(btnAddBook);
+            pBooks.Controls.Add(dgvBooks);
+            pBooks.Location = new Point(12, 58);
+            pBooks.Name = "pBooks";
+            pBooks.Size = new Size(776, 380);
+            pBooks.TabIndex = 5;
+            // 
+            // btnAddBook
+            // 
+            btnAddBook.Location = new Point(3, 69);
+            btnAddBook.Name = "btnAddBook";
+            btnAddBook.Size = new Size(75, 23);
+            btnAddBook.TabIndex = 1;
+            btnAddBook.Text = "Add Book";
+            btnAddBook.UseVisualStyleBackColor = true;
+            // 
+            // dgvBooks
+            // 
+            dgvBooks.AllowUserToAddRows = false;
+            dgvBooks.AllowUserToDeleteRows = false;
+            dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Book_ID, Book_ISBN, Book_Title, Book_Author, Book_Available, Book_Manage });
+            dgvBooks.AutoGenerateColumns = false;
+            dgvBooks.Location = new Point(3, 98);
+            dgvBooks.MultiSelect = false;
+            dgvBooks.Name = "dgvBooks";
+            dgvBooks.ReadOnly = true;
+            dgvBooks.RowTemplate.Height = 25;
+            dgvBooks.Size = new Size(770, 279);
+            dgvBooks.TabIndex = 0;
+            dgvBooks.CellContentClick += dgvBooks_ManageBookClick;
+            dgvBooks.CellFormatting += dgvBooks_CellFormatting;
+            // 
+            // Book_ID
+            // 
+            Book_ID.DataPropertyName = "ID";
+            Book_ID.FillWeight = 40F;
+            Book_ID.HeaderText = "ID";
+            Book_ID.Name = "Book_ID";
+            Book_ID.ReadOnly = true;
+            // 
+            // Book_ISBN
+            // 
+            Book_ISBN.DataPropertyName = "ISBN";
+            Book_ISBN.FillWeight = 70F;
+            Book_ISBN.HeaderText = "ISBN";
+            Book_ISBN.Name = "Book_ISBN";
+            Book_ISBN.ReadOnly = true;
+            // 
+            // Book_Title
+            // 
+            Book_Title.DataPropertyName = "Title";
+            Book_Title.FillWeight = 120F;
+            Book_Title.HeaderText = "Title";
+            Book_Title.Name = "Book_Title";
+            Book_Title.ReadOnly = true;
+            // 
+            // Book_Author
+            // 
+            Book_Author.DataPropertyName = "Author";
+            Book_Author.HeaderText = "Author";
+            Book_Author.Name = "Book_Author";
+            Book_Author.ReadOnly = true;
+            // 
+            // Book_Available
+            // 
+            Book_Available.FillWeight = 50F;
+            Book_Available.HeaderText = "Available";
+            Book_Available.Name = "Book_Available";
+            Book_Available.ReadOnly = true;
+            // 
+            // Book_Manage
+            // 
+            Book_Manage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.Transparent;
             dataGridViewCellStyle2.ForeColor = Color.Gray;
-            Manage.DefaultCellStyle = dataGridViewCellStyle2;
-            Manage.FillWeight = 50F;
-            Manage.HeaderText = "Manage";
-            Manage.Name = "Manage";
-            Manage.ReadOnly = true;
-            Manage.Text = "Manage";
-            Manage.ToolTipText = "Manage";
-            Manage.UseColumnTextForButtonValue = true;
+            Book_Manage.DefaultCellStyle = dataGridViewCellStyle2;
+            Book_Manage.FillWeight = 50F;
+            Book_Manage.HeaderText = "Manage";
+            Book_Manage.Name = "Book_Manage";
+            Book_Manage.ReadOnly = true;
+            Book_Manage.Text = "Manage";
+            Book_Manage.ToolTipText = "Manage";
+            Book_Manage.UseColumnTextForButtonValue = true;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(pBooks);
             Controls.Add(pClients);
             Controls.Add(btnBooks);
             Controls.Add(btnClients);
@@ -181,6 +288,8 @@
             pClients.ResumeLayout(false);
             pClients.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();
+            pBooks.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
             ResumeLayout(false);
         }
 
@@ -194,11 +303,19 @@
         private TextBox vSearchFirstName;
         private TextBox vSearchLastName;
         private TextBox vSearchEmail;
-        private DataGridViewTextBoxColumn ID;
-        private DataGridViewTextBoxColumn FirstName;
-        private DataGridViewTextBoxColumn LastName;
-        private DataGridViewTextBoxColumn Email;
-        private DataGridViewButtonColumn Manage;
-        private DataGridViewTextBoxColumn Borrows;
+        private DataGridViewTextBoxColumn Client_ID;
+        private DataGridViewTextBoxColumn Client_FirstName;
+        private DataGridViewTextBoxColumn Client_LastName;
+        private DataGridViewTextBoxColumn Client_Email;
+        private DataGridViewButtonColumn Client_Manage;
+        private Panel pBooks;
+        private DataGridView dgvBooks;
+        private Button btnAddBook;
+        private DataGridViewTextBoxColumn Book_ID;
+        private DataGridViewTextBoxColumn Book_ISBN;
+        private DataGridViewTextBoxColumn Book_Title;
+        private DataGridViewTextBoxColumn Book_Author;
+        private DataGridViewCheckBoxColumn Book_Available;
+        private DataGridViewButtonColumn Book_Manage;
     }
 }

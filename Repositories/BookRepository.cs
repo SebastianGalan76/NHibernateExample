@@ -30,5 +30,12 @@ namespace NHibernateExample.Repositories {
         public IList<Book> GetBooks() {
             return mSession.Query<Book>().ToList();
         }
+
+        public void Delete(Book book) {
+            using(var transaction = mSession.BeginTransaction()) {
+                mSession.Delete(book);
+                transaction.Commit();
+            }
+        }
     }
 }
