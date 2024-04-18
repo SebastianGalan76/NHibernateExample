@@ -25,8 +25,8 @@ namespace NHibernateExample {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             btnClients = new Button();
             btnBooks = new Button();
             pClients = new Panel();
@@ -37,6 +37,9 @@ namespace NHibernateExample {
             dgvClients = new DataGridView();
             Client_Manage = new DataGridViewButtonColumn();
             pBooks = new Panel();
+            vSearchAuthor = new TextBox();
+            vSearchTitle = new TextBox();
+            vSearchISBN = new TextBox();
             btnAddBook = new Button();
             dgvBooks = new DataGridView();
             Book_ID = new DataGridViewTextBoxColumn();
@@ -91,7 +94,7 @@ namespace NHibernateExample {
             vSearchEmail.Name = "vSearchEmail";
             vSearchEmail.Size = new Size(188, 23);
             vSearchEmail.TabIndex = 4;
-            vSearchEmail.TextChanged += vSearch_TextChanged;
+            vSearchEmail.TextChanged += vSearchClient_TextChanged;
             // 
             // vSearchLastName
             // 
@@ -99,7 +102,7 @@ namespace NHibernateExample {
             vSearchLastName.Name = "vSearchLastName";
             vSearchLastName.Size = new Size(178, 23);
             vSearchLastName.TabIndex = 3;
-            vSearchLastName.TextChanged += vSearch_TextChanged;
+            vSearchLastName.TextChanged += vSearchClient_TextChanged;
             // 
             // vSearchFirstName
             // 
@@ -107,7 +110,7 @@ namespace NHibernateExample {
             vSearchFirstName.Name = "vSearchFirstName";
             vSearchFirstName.Size = new Size(180, 23);
             vSearchFirstName.TabIndex = 2;
-            vSearchFirstName.TextChanged += vSearch_TextChanged;
+            vSearchFirstName.TextChanged += vSearchClient_TextChanged;
             // 
             // btnAddClient
             // 
@@ -138,10 +141,10 @@ namespace NHibernateExample {
             // Client_Manage
             // 
             Client_Manage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.Transparent;
-            dataGridViewCellStyle1.ForeColor = Color.Gray;
-            Client_Manage.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = Color.Transparent;
+            dataGridViewCellStyle3.ForeColor = Color.Gray;
+            Client_Manage.DefaultCellStyle = dataGridViewCellStyle3;
             Client_Manage.FillWeight = 50F;
             Client_Manage.HeaderText = "Manage";
             Client_Manage.Name = "Client_Manage";
@@ -153,6 +156,9 @@ namespace NHibernateExample {
             // pBooks
             // 
             pBooks.BackColor = SystemColors.Control;
+            pBooks.Controls.Add(vSearchAuthor);
+            pBooks.Controls.Add(vSearchTitle);
+            pBooks.Controls.Add(vSearchISBN);
             pBooks.Controls.Add(btnAddBook);
             pBooks.Controls.Add(dgvBooks);
             pBooks.Location = new Point(12, 58);
@@ -160,11 +166,35 @@ namespace NHibernateExample {
             pBooks.Size = new Size(776, 380);
             pBooks.TabIndex = 5;
             // 
+            // vSearchAuthor
+            // 
+            vSearchAuthor.Location = new Point(433, 70);
+            vSearchAuthor.Name = "vSearchAuthor";
+            vSearchAuthor.Size = new Size(167, 23);
+            vSearchAuthor.TabIndex = 4;
+            vSearchAuthor.TextChanged += vSearchBook_TextChanged;
+            // 
+            // vSearchTitle
+            // 
+            vSearchTitle.Location = new Point(232, 70);
+            vSearchTitle.Name = "vSearchTitle";
+            vSearchTitle.Size = new Size(195, 23);
+            vSearchTitle.TabIndex = 3;
+            vSearchTitle.TextChanged += vSearchBook_TextChanged;
+            // 
+            // vSearchISBN
+            // 
+            vSearchISBN.Location = new Point(108, 69);
+            vSearchISBN.Name = "vSearchISBN";
+            vSearchISBN.Size = new Size(118, 23);
+            vSearchISBN.TabIndex = 2;
+            vSearchISBN.TextChanged += vSearchBook_TextChanged;
+            // 
             // btnAddBook
             // 
             btnAddBook.Location = new Point(3, 69);
             btnAddBook.Name = "btnAddBook";
-            btnAddBook.Size = new Size(75, 23);
+            btnAddBook.Size = new Size(99, 23);
             btnAddBook.TabIndex = 1;
             btnAddBook.Text = "Add Book";
             btnAddBook.UseVisualStyleBackColor = true;
@@ -228,10 +258,10 @@ namespace NHibernateExample {
             // Book_Manage
             // 
             Book_Manage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.Transparent;
-            dataGridViewCellStyle2.ForeColor = Color.Gray;
-            Book_Manage.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = Color.Transparent;
+            dataGridViewCellStyle4.ForeColor = Color.Gray;
+            Book_Manage.DefaultCellStyle = dataGridViewCellStyle4;
             Book_Manage.FillWeight = 50F;
             Book_Manage.HeaderText = "Manage";
             Book_Manage.Name = "Book_Manage";
@@ -255,6 +285,7 @@ namespace NHibernateExample {
             pClients.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();
             pBooks.ResumeLayout(false);
+            pBooks.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
             ResumeLayout(false);
         }
@@ -283,5 +314,8 @@ namespace NHibernateExample {
         private DataGridViewTextBoxColumn Book_Author;
         private DataGridViewCheckBoxColumn Book_Available;
         private DataGridViewButtonColumn Book_Manage;
+        private TextBox vSearchAuthor;
+        private TextBox vSearchTitle;
+        private TextBox vSearchISBN;
     }
 }

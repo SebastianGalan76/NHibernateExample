@@ -8,7 +8,7 @@ namespace NHibernateExample {
         private readonly ClientContainer mClientContainer;
         private readonly BookContainer mBookContainer;
 
-        private ClientFilter mClientFilter = new();
+        private DataFilter mDataFilter = new();
 
         public MainForm() {
             InitializeComponent();
@@ -53,9 +53,13 @@ namespace NHibernateExample {
             form.ShowDialog();
         }
 
-        private void vSearch_TextChanged(object sender, EventArgs e) {
-            IList<Client> foundedClients = mClientFilter.GetFilteredClientList(mClientContainer, vSearchFirstName.Text, vSearchLastName.Text, vSearchEmail.Text);
+        private void vSearchClient_TextChanged(object sender, EventArgs e) {
+            IList<Client> foundedClients = mDataFilter.GetFilteredClientList(mClientContainer, vSearchFirstName.Text, vSearchLastName.Text, vSearchEmail.Text);
             RefreshClientDataGrid(foundedClients);
+        }
+        private void vSearchBook_TextChanged(object sender, EventArgs e) {
+            IList<Book> foundedBooks = mDataFilter.GetFilteredBookList(mBookContainer, vSearchISBN.Text, vSearchTitle.Text, vSearchAuthor.Text);
+            RefreshBookDataGrid(foundedBooks);
         }
 
         private void dgvClients_ManageClientClick(object sender, DataGridViewCellEventArgs e) {
