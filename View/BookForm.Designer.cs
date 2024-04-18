@@ -33,7 +33,14 @@
             label2 = new Label();
             label1 = new Label();
             btnDelete = new Button();
+            dgvBorrowHistory = new DataGridView();
+            FirstName = new DataGridViewTextBoxColumn();
+            LastName = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
+            BorrowDate = new DataGridViewTextBoxColumn();
+            ReturnDate = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvBorrowHistory).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -140,17 +147,67 @@
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
+            // dataGridView1
+            // 
+            dgvBorrowHistory.AllowUserToAddRows = false;
+            dgvBorrowHistory.AllowUserToDeleteRows = false;
+            dgvBorrowHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBorrowHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBorrowHistory.Columns.AddRange(new DataGridViewColumn[] { FirstName, LastName, Email, BorrowDate, ReturnDate });
+            dgvBorrowHistory.AutoGenerateColumns = false;
+            dgvBorrowHistory.Location = new Point(12, 243);
+            dgvBorrowHistory.Name = "dataGridView1";
+            dgvBorrowHistory.ReadOnly = true;
+            dgvBorrowHistory.RowTemplate.Height = 25;
+            dgvBorrowHistory.Size = new Size(765, 195);
+            dgvBorrowHistory.TabIndex = 2;
+            dgvBorrowHistory.CellFormatting += dgvBorrowedBooks_CellFormatting;
+            // 
+            // FirstName
+            // 
+            FirstName.HeaderText = "First Name";
+            FirstName.Name = "FirstName";
+            FirstName.ReadOnly = true;
+            // 
+            // LastName
+            // 
+            LastName.HeaderText = "Last Name";
+            LastName.Name = "LastName";
+            LastName.ReadOnly = true;
+            // 
+            // Email
+            // 
+            Email.HeaderText = "Email";
+            Email.Name = "Email";
+            Email.ReadOnly = true;
+            // 
+            // BorrowDate
+            // 
+            BorrowDate.HeaderText = "Borrow Date";
+            BorrowDate.Name = "BorrowDate";
+            BorrowDate.ReadOnly = true;
+            BorrowDate.DataPropertyName = "BorrowDate";
+            // 
+            // ReturnDate
+            // 
+            ReturnDate.HeaderText = "Return Date";
+            ReturnDate.Name = "ReturnDate";
+            ReturnDate.ReadOnly = true;
+            ReturnDate.DataPropertyName = "ReturnDate";
+            // 
             // BookForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(dgvBorrowHistory);
             Controls.Add(btnDelete);
             Controls.Add(panel1);
             Name = "BookForm";
             Text = "BookForm";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvBorrowHistory).EndInit();
             ResumeLayout(false);
         }
 
@@ -166,5 +223,11 @@
         private Label tvAuthor;
         private Label tvTitle;
         private Button btnDelete;
+        private DataGridView dgvBorrowHistory;
+        private DataGridViewTextBoxColumn FirstName;
+        private DataGridViewTextBoxColumn LastName;
+        private DataGridViewTextBoxColumn Email;
+        private DataGridViewTextBoxColumn BorrowDate;
+        private DataGridViewTextBoxColumn ReturnDate;
     }
 }
