@@ -69,7 +69,8 @@ namespace NHibernateExample {
                 Book selectedBook = dgvBooks.Rows[e.RowIndex].DataBoundItem as Book;
 
                 if(selectedBook != null) {
-
+                    BookForm form = new BookForm(selectedBook, mBookContainer);
+                    form.ShowDialog();
                 }
             }
         }
