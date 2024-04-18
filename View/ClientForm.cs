@@ -4,9 +4,10 @@ using NHibernateExample.Models;
 namespace NHibernateExample.View {
     public partial class ClientForm : Form {
         private readonly ClientContainer mClientContainer;
+        private readonly BookContainer mBookContainer;
         private readonly Client mClient;
 
-        internal ClientForm(Client client, ClientContainer clientContainer) {
+        internal ClientForm(Client client, ClientContainer clientContainer, BookContainer bookContainer) {
             InitializeComponent();
 
             mClient = client;
@@ -15,7 +16,9 @@ namespace NHibernateExample.View {
             vEmail.Text = client.Email;
 
             mClientContainer = clientContainer;
+            mBookContainer = bookContainer;
             if(client.Borrows != null && client.Borrows.Count > 0) {
+                dgvBorrowedBooks.AutoGenerateColumns = false;
                 dgvBorrowedBooks.DataSource = client.Borrows.Where(b => !b.IsReturned()).ToList();
             }
 
@@ -34,6 +37,27 @@ namespace NHibernateExample.View {
         private void btnDelete_Click(object sender, EventArgs e) {
             mClientContainer.RemoveClient(mClient);
             Hide();
+        }
+
+        private void btnSaveChanges_Click(object sender, EventArgs e) {
+            UpdateClient();
+
+            btnSaveChanges.Visible = false;
+            btnCancelChanges.Visible = false;
+        }
+
+        private void btnCancelChanges_Click(object sender, EventArgs e) {
+            vFirstName.Text = mClient.FirstName;
+            vLastName.Text = mClient.LastName;
+            vEmail.Text = mClient.Email;
+
+            btnSaveChanges.Visible = false;
+            btnCancelChanges.Visible = false;
+        }
+
+        private void btnBorrow_Click(object sender, EventArgs e) {
+            BorrowBookForm form = new BorrowBookForm(mClient, mBookContainer);
+            form.ShowDialog();
         }
 
         private void dgvBorrowedBooks_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
@@ -76,22 +100,6 @@ namespace NHibernateExample.View {
         private void vData_TextChanged(object sender, EventArgs e) {
             btnSaveChanges.Visible = true;
             btnCancelChanges.Visible = true;
-        }
-
-        private void btnSaveChanges_Click(object sender, EventArgs e) {
-            UpdateClient();
-
-            btnSaveChanges.Visible = false;
-            btnCancelChanges.Visible = false;
-        }
-
-        private void btnCancelChanges_Click(object sender, EventArgs e) {
-            vFirstName.Text = mClient.FirstName;
-            vLastName.Text = mClient.LastName;
-            vEmail.Text = mClient.Email;
-
-            btnSaveChanges.Visible = false;
-            btnCancelChanges.Visible = false;
         }
     }
 }

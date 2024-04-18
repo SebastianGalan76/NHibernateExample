@@ -44,6 +44,7 @@ namespace NHibernateExample.View {
             BorrowDate = new DataGridViewTextBoxColumn();
             Return = new DataGridViewButtonColumn();
             label4 = new Label();
+            btnBorrow = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBorrowedBooks).BeginInit();
             SuspendLayout();
@@ -217,11 +218,22 @@ namespace NHibernateExample.View {
             label4.TabIndex = 3;
             label4.Text = "Borrowed books";
             // 
+            // btnBorrow
+            // 
+            btnBorrow.Location = new Point(638, 238);
+            btnBorrow.Name = "btnBorrow";
+            btnBorrow.Size = new Size(137, 23);
+            btnBorrow.TabIndex = 4;
+            btnBorrow.Text = "Borrow Book";
+            btnBorrow.UseVisualStyleBackColor = true;
+            btnBorrow.Click += btnBorrow_Click;
+            // 
             // ClientForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnBorrow);
             Controls.Add(label4);
             Controls.Add(dgvBorrowedBooks);
             Controls.Add(btnDelete);
@@ -254,5 +266,6 @@ namespace NHibernateExample.View {
         private DataGridViewButtonColumn Return;
         private Button btnCancelChanges;
         private Button btnSaveChanges;
+        private Button btnBorrow;
     }
 }

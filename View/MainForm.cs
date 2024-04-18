@@ -67,7 +67,7 @@ namespace NHibernateExample {
                 Client selectedClient = dgvClients.Rows[e.RowIndex].DataBoundItem as Client;
 
                 if(selectedClient != null) {
-                    ClientForm form = new ClientForm(selectedClient, mClientContainer);
+                    ClientForm form = new ClientForm(selectedClient, mClientContainer, mBookContainer);
                     form.ShowDialog();
                 }
             }
