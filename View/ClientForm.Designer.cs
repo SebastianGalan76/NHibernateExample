@@ -26,9 +26,10 @@ namespace NHibernateExample.View {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panel1 = new Panel();
+            btnCancelChanges = new Button();
+            btnSaveChanges = new Button();
             vEmail = new TextBox();
             label3 = new Label();
             vLastName = new TextBox();
@@ -37,12 +38,12 @@ namespace NHibernateExample.View {
             label1 = new Label();
             btnDelete = new Button();
             dgvBorrowedBooks = new DataGridView();
-            label4 = new Label();
             ISBN = new DataGridViewTextBoxColumn();
             Title = new DataGridViewTextBoxColumn();
             Author = new DataGridViewTextBoxColumn();
             BorrowDate = new DataGridViewTextBoxColumn();
             Return = new DataGridViewButtonColumn();
+            label4 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBorrowedBooks).BeginInit();
             SuspendLayout();
@@ -50,6 +51,8 @@ namespace NHibernateExample.View {
             // panel1
             // 
             panel1.BackColor = SystemColors.ControlLight;
+            panel1.Controls.Add(btnCancelChanges);
+            panel1.Controls.Add(btnSaveChanges);
             panel1.Controls.Add(vEmail);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(vLastName);
@@ -58,8 +61,30 @@ namespace NHibernateExample.View {
             panel1.Controls.Add(label1);
             panel1.Location = new Point(17, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(295, 150);
+            panel1.Size = new Size(295, 188);
             panel1.TabIndex = 0;
+            // 
+            // btnCancelChanges
+            // 
+            btnCancelChanges.Location = new Point(146, 144);
+            btnCancelChanges.Name = "btnCancelChanges";
+            btnCancelChanges.Size = new Size(135, 23);
+            btnCancelChanges.TabIndex = 7;
+            btnCancelChanges.Text = "Cancel";
+            btnCancelChanges.UseVisualStyleBackColor = true;
+            btnCancelChanges.Visible = false;
+            btnCancelChanges.Click += btnCancelChanges_Click;
+            // 
+            // btnSaveChanges
+            // 
+            btnSaveChanges.Location = new Point(12, 144);
+            btnSaveChanges.Name = "btnSaveChanges";
+            btnSaveChanges.Size = new Size(128, 23);
+            btnSaveChanges.TabIndex = 6;
+            btnSaveChanges.Text = "Save";
+            btnSaveChanges.UseVisualStyleBackColor = true;
+            btnSaveChanges.Visible = false;
+            btnSaveChanges.Click += btnSaveChanges_Click;
             // 
             // vEmail
             // 
@@ -67,6 +92,7 @@ namespace NHibernateExample.View {
             vEmail.Name = "vEmail";
             vEmail.Size = new Size(269, 23);
             vEmail.TabIndex = 5;
+            vEmail.TextChanged += vData_TextChanged;
             // 
             // label3
             // 
@@ -83,6 +109,7 @@ namespace NHibernateExample.View {
             vLastName.Name = "vLastName";
             vLastName.Size = new Size(269, 23);
             vLastName.TabIndex = 3;
+            vLastName.TextChanged += vData_TextChanged;
             // 
             // label2
             // 
@@ -99,6 +126,7 @@ namespace NHibernateExample.View {
             vFirstName.Name = "vFirstName";
             vFirstName.Size = new Size(269, 23);
             vFirstName.TabIndex = 1;
+            vFirstName.TextChanged += vData_TextChanged;
             // 
             // label1
             // 
@@ -127,25 +155,15 @@ namespace NHibernateExample.View {
             dgvBorrowedBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBorrowedBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBorrowedBooks.Columns.AddRange(new DataGridViewColumn[] { ISBN, Title, Author, BorrowDate, Return });
-            dgvBorrowedBooks.AutoGenerateColumns = false;
-            dgvBorrowedBooks.MultiSelect = false;
             dgvBorrowedBooks.Location = new Point(17, 269);
+            dgvBorrowedBooks.MultiSelect = false;
             dgvBorrowedBooks.Name = "dgvBorrowedBooks";
             dgvBorrowedBooks.ReadOnly = true;
             dgvBorrowedBooks.RowTemplate.Height = 25;
             dgvBorrowedBooks.Size = new Size(758, 150);
             dgvBorrowedBooks.TabIndex = 2;
-            dgvBorrowedBooks.CellFormatting += dgvBorrowedBooks_CellFormatting;
             dgvBorrowedBooks.CellContentClick += dgvBorrowedBooks_ManageClientClick;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(17, 242);
-            label4.Name = "label4";
-            label4.Size = new Size(93, 15);
-            label4.TabIndex = 3;
-            label4.Text = "Borrowed books";
+            dgvBorrowedBooks.CellFormatting += dgvBorrowedBooks_CellFormatting;
             // 
             // ISBN
             // 
@@ -178,10 +196,10 @@ namespace NHibernateExample.View {
             // Return
             // 
             Return.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = Color.Transparent;
-            dataGridViewCellStyle2.ForeColor = Color.Gray;
-            Return.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.Transparent;
+            dataGridViewCellStyle1.ForeColor = Color.Gray;
+            Return.DefaultCellStyle = dataGridViewCellStyle1;
             Return.FillWeight = 50F;
             Return.HeaderText = "Return";
             Return.Name = "Return";
@@ -189,6 +207,15 @@ namespace NHibernateExample.View {
             Return.Text = "Return";
             Return.ToolTipText = "Return book";
             Return.UseColumnTextForButtonValue = true;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(17, 242);
+            label4.Name = "label4";
+            label4.Size = new Size(93, 15);
+            label4.TabIndex = 3;
+            label4.Text = "Borrowed books";
             // 
             // ClientForm
             // 
@@ -225,5 +252,7 @@ namespace NHibernateExample.View {
         private DataGridViewTextBoxColumn Author;
         private DataGridViewTextBoxColumn BorrowDate;
         private DataGridViewButtonColumn Return;
+        private Button btnCancelChanges;
+        private Button btnSaveChanges;
     }
 }

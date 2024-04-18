@@ -36,6 +36,7 @@ namespace NHibernateExample.Container {
 
         public void UpdateClient(Client client) {
             mClientRepository.SaveOrUpdate(client);
+            mRefreshDataGrid(mClients);
         }
     }
 }

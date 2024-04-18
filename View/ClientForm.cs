@@ -18,12 +18,17 @@ namespace NHibernateExample.View {
             if(client.Borrows != null && client.Borrows.Count > 0) {
                 dgvBorrowedBooks.DataSource = client.Borrows.Where(b => !b.IsReturned()).ToList();
             }
+
+            btnSaveChanges.Visible = false;
+            btnCancelChanges.Visible = false;
         }
 
-        private void UpdateUser() {
+        private void UpdateClient() {
             mClient.FirstName = vFirstName.Text;
             mClient.LastName = vLastName.Text;
             mClient.Email = vEmail.Text;
+
+            mClientContainer.UpdateClient(mClient);
         }
 
         private void btnDelete_Click(object sender, EventArgs e) {
@@ -66,6 +71,27 @@ namespace NHibernateExample.View {
                     MessageBox.Show("The book has been returned.", "OK");
                 }
             }
+        }
+
+        private void vData_TextChanged(object sender, EventArgs e) {
+            btnSaveChanges.Visible = true;
+            btnCancelChanges.Visible = true;
+        }
+
+        private void btnSaveChanges_Click(object sender, EventArgs e) {
+            UpdateClient();
+
+            btnSaveChanges.Visible = false;
+            btnCancelChanges.Visible = false;
+        }
+
+        private void btnCancelChanges_Click(object sender, EventArgs e) {
+            vFirstName.Text = mClient.FirstName;
+            vLastName.Text = mClient.LastName;
+            vEmail.Text = mClient.Email;
+
+            btnSaveChanges.Visible = false;
+            btnCancelChanges.Visible = false;
         }
     }
 }

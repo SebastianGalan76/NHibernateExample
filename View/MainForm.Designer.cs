@@ -25,8 +25,8 @@ namespace NHibernateExample {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             btnClients = new Button();
             btnBooks = new Button();
             pClients = new Panel();
@@ -35,6 +35,10 @@ namespace NHibernateExample {
             vSearchFirstName = new TextBox();
             btnAddClient = new Button();
             dgvClients = new DataGridView();
+            Client_ID = new DataGridViewTextBoxColumn();
+            Client_FirstName = new DataGridViewTextBoxColumn();
+            Client_LastName = new DataGridViewTextBoxColumn();
+            Client_Email = new DataGridViewTextBoxColumn();
             Client_Manage = new DataGridViewButtonColumn();
             pBooks = new Panel();
             vSearchAuthor = new TextBox();
@@ -128,7 +132,7 @@ namespace NHibernateExample {
             dgvClients.AllowUserToDeleteRows = false;
             dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClients.Columns.AddRange(new DataGridViewColumn[] { Client_Manage });
+            dgvClients.Columns.AddRange(new DataGridViewColumn[] { Client_ID, Client_FirstName, Client_LastName, Client_Email, Client_Manage });
             dgvClients.Location = new Point(3, 98);
             dgvClients.MultiSelect = false;
             dgvClients.Name = "dgvClients";
@@ -138,13 +142,42 @@ namespace NHibernateExample {
             dgvClients.TabIndex = 0;
             dgvClients.CellContentClick += dgvClients_ManageClientClick;
             // 
+            // Client_ID
+            // 
+            Client_ID.DataPropertyName = "ID";
+            Client_ID.FillWeight = 40F;
+            Client_ID.HeaderText = "ID";
+            Client_ID.Name = "Client_ID";
+            Client_ID.ReadOnly = true;
+            // 
+            // Client_FirstName
+            // 
+            Client_FirstName.DataPropertyName = "FirstName";
+            Client_FirstName.HeaderText = "First Name";
+            Client_FirstName.Name = "Client_FirstName";
+            Client_FirstName.ReadOnly = true;
+            // 
+            // Client_LastName
+            // 
+            Client_LastName.DataPropertyName = "LastName";
+            Client_LastName.HeaderText = "Last Name";
+            Client_LastName.Name = "Client_LastName";
+            Client_LastName.ReadOnly = true;
+            // 
+            // Client_Email
+            // 
+            Client_Email.DataPropertyName = "Email";
+            Client_Email.HeaderText = "Client_Email";
+            Client_Email.Name = "Client_Email";
+            Client_Email.ReadOnly = true;
+            // 
             // Client_Manage
             // 
             Client_Manage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.Transparent;
-            dataGridViewCellStyle3.ForeColor = Color.Gray;
-            Client_Manage.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.Transparent;
+            dataGridViewCellStyle1.ForeColor = Color.Gray;
+            Client_Manage.DefaultCellStyle = dataGridViewCellStyle1;
             Client_Manage.FillWeight = 50F;
             Client_Manage.HeaderText = "Manage";
             Client_Manage.Name = "Client_Manage";
@@ -161,7 +194,7 @@ namespace NHibernateExample {
             pBooks.Controls.Add(vSearchISBN);
             pBooks.Controls.Add(btnAddBook);
             pBooks.Controls.Add(dgvBooks);
-            pBooks.Location = new Point(12, 58);
+            pBooks.Location = new Point(9, 58);
             pBooks.Name = "pBooks";
             pBooks.Size = new Size(776, 380);
             pBooks.TabIndex = 5;
@@ -258,10 +291,10 @@ namespace NHibernateExample {
             // Book_Manage
             // 
             Book_Manage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = Color.Transparent;
-            dataGridViewCellStyle4.ForeColor = Color.Gray;
-            Book_Manage.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.Transparent;
+            dataGridViewCellStyle2.ForeColor = Color.Gray;
+            Book_Manage.DefaultCellStyle = dataGridViewCellStyle2;
             Book_Manage.FillWeight = 50F;
             Book_Manage.HeaderText = "Manage";
             Book_Manage.Name = "Book_Manage";
@@ -300,11 +333,6 @@ namespace NHibernateExample {
         private TextBox vSearchFirstName;
         private TextBox vSearchLastName;
         private TextBox vSearchEmail;
-        private DataGridViewTextBoxColumn Client_ID;
-        private DataGridViewTextBoxColumn Client_FirstName;
-        private DataGridViewTextBoxColumn Client_LastName;
-        private DataGridViewTextBoxColumn Client_Email;
-        private DataGridViewButtonColumn Client_Manage;
         private Panel pBooks;
         private DataGridView dgvBooks;
         private Button btnAddBook;
@@ -317,5 +345,10 @@ namespace NHibernateExample {
         private TextBox vSearchAuthor;
         private TextBox vSearchTitle;
         private TextBox vSearchISBN;
+        private DataGridViewButtonColumn Client_Manage;
+        private DataGridViewTextBoxColumn Client_FirstName;
+        private DataGridViewTextBoxColumn Client_LastName;
+        private DataGridViewTextBoxColumn Client_Email;
+        private DataGridViewTextBoxColumn Client_ID;
     }
 }
