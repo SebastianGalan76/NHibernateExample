@@ -48,6 +48,10 @@ namespace NHibernateExample {
             AddNewClientForm form = new AddNewClientForm(mClientContainer);
             form.ShowDialog();
         }
+        private void btnAddBook_Click(object sender, EventArgs e) {
+            AddNewBookForm form = new AddNewBookForm(mBookContainer);
+            form.ShowDialog();
+        }
 
         private void vSearch_TextChanged(object sender, EventArgs e) {
             IList<Client> foundedClients = mClientFilter.GetFilteredClientList(mClientContainer, vSearchFirstName.Text, vSearchLastName.Text, vSearchEmail.Text);
@@ -76,6 +80,10 @@ namespace NHibernateExample {
         }
 
         private void dgvBooks_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+            if(e.RowIndex >= mBookContainer.GetBooks().Count) {
+                return;
+            }
+
             var book = dgvBooks.Rows[e.RowIndex].DataBoundItem as Book;
 
             if(dgvBooks.Columns[e.ColumnIndex].Name == "Book_Available" && e.Value == null) {

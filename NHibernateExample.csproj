@@ -25,4 +25,10 @@
     <PackageReference Include="Npgsql" Version="8.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="View\AddNewBookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

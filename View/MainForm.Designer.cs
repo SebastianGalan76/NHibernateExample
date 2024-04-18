@@ -35,10 +35,6 @@ namespace NHibernateExample {
             vSearchFirstName = new TextBox();
             btnAddClient = new Button();
             dgvClients = new DataGridView();
-            Client_ID = new DataGridViewTextBoxColumn();
-            Client_FirstName = new DataGridViewTextBoxColumn();
-            Client_LastName = new DataGridViewTextBoxColumn();
-            Client_Email = new DataGridViewTextBoxColumn();
             Client_Manage = new DataGridViewButtonColumn();
             pBooks = new Panel();
             btnAddBook = new Button();
@@ -129,8 +125,7 @@ namespace NHibernateExample {
             dgvClients.AllowUserToDeleteRows = false;
             dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClients.Columns.AddRange(new DataGridViewColumn[] {Client_ID, Client_FirstName, Client_LastName, Client_Email, Client_Manage });
-            dgvClients.AutoGenerateColumns = false;
+            dgvClients.Columns.AddRange(new DataGridViewColumn[] { Client_Manage });
             dgvClients.Location = new Point(3, 98);
             dgvClients.MultiSelect = false;
             dgvClients.Name = "dgvClients";
@@ -139,35 +134,6 @@ namespace NHibernateExample {
             dgvClients.Size = new Size(770, 279);
             dgvClients.TabIndex = 0;
             dgvClients.CellContentClick += dgvClients_ManageClientClick;
-            // 
-            // ID
-            // 
-            Client_ID.DataPropertyName = "ID";
-            Client_ID.FillWeight = 40F;
-            Client_ID.HeaderText = "ID";
-            Client_ID.Name = "Client_ID";
-            Client_ID.ReadOnly = true;
-            // 
-            // FirstName
-            // 
-            Client_FirstName.DataPropertyName = "FirstName";
-            Client_FirstName.HeaderText = "First Name";
-            Client_FirstName.Name = "Client_FirstName";
-            Client_FirstName.ReadOnly = true;
-            // 
-            // LastName
-            // 
-            Client_LastName.DataPropertyName = "LastName";
-            Client_LastName.HeaderText = "Last Name";
-            Client_LastName.Name = "Client_LastName";
-            Client_LastName.ReadOnly = true;
-            // 
-            // Email
-            // 
-            Client_Email.DataPropertyName = "Email";
-            Client_Email.HeaderText = "Client_Email";
-            Client_Email.Name = "Email";
-            Client_Email.ReadOnly = true;
             // 
             // Client_Manage
             // 
@@ -202,6 +168,7 @@ namespace NHibernateExample {
             btnAddBook.TabIndex = 1;
             btnAddBook.Text = "Add Book";
             btnAddBook.UseVisualStyleBackColor = true;
+            btnAddBook.Click += btnAddBook_Click;
             // 
             // dgvBooks
             // 
@@ -210,7 +177,6 @@ namespace NHibernateExample {
             dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Book_ID, Book_ISBN, Book_Title, Book_Author, Book_Available, Book_Manage });
-            dgvBooks.AutoGenerateColumns = false;
             dgvBooks.Location = new Point(3, 98);
             dgvBooks.MultiSelect = false;
             dgvBooks.Name = "dgvBooks";
