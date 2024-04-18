@@ -113,8 +113,9 @@
             dgvClients.AllowUserToDeleteRows = false;
             dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClients.Columns.AddRange(new DataGridViewColumn[] { ID, FirstName, LastName, Email, Manage, Borrows });
-            dgvClients.CellContentClick += DgvClients_ManageClientClick;
+            dgvClients.Columns.AddRange(new DataGridViewColumn[] { ID, FirstName, LastName, Email, Manage });
+            dgvClients.CellContentClick += dgvClients_ManageClientClick;
+            dgvClients.AutoGenerateColumns = false;
             dgvClients.Location = new Point(3, 98);
             dgvClients.MultiSelect = false;
             dgvClients.Name = "dgvClients";
@@ -166,14 +167,6 @@
             Manage.Text = "Manage";
             Manage.ToolTipText = "Manage";
             Manage.UseColumnTextForButtonValue = true;
-            // 
-            // Borrows
-            // 
-            Borrows.DataPropertyName = "Borrows";
-            Borrows.HeaderText = "Borrows";
-            Borrows.Name = "Borrows";
-            Borrows.ReadOnly = true;
-            Borrows.Visible = false;
             // 
             // MainForm
             // 

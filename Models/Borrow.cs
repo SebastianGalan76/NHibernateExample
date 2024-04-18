@@ -9,5 +9,9 @@
         public virtual bool IsReturned() {
             return ReturnDate != DateTime.MinValue;
         }
+
+        public virtual void Return() {
+            ReturnDate = DateTime.Now;
+        }
     }
 }

@@ -33,5 +33,9 @@ namespace NHibernateExample.Container {
             mClientRepository.Delete(client);
             mRefreshDataGrid(mClients);
         }
+
+        public void UpdateClient(Client client) {
+            mClientRepository.SaveOrUpdate(client);
+        }
     }
 }

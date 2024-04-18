@@ -22,27 +22,8 @@ namespace NHibernateExample {
         }
 
         private void RefreshDataGrid(IList<Client> clients) {
-            List<DataGridViewColumn> savedColumns = new List<DataGridViewColumn>();
-            string[] columnOrder = new string[] { "ID", "FirstName", "LastName", "Email", "Manage" };
-            foreach(DataGridViewColumn column in dgvClients.Columns) {
-                savedColumns.Add(column);
-            }
-
             dgvClients.DataSource = null;
             dgvClients.DataSource = clients;
-
-            dgvClients.Columns.Clear();
-            foreach(DataGridViewColumn column in savedColumns) {
-                dgvClients.Columns.Add(column.Clone() as DataGridViewColumn);
-            }
-
-            //Restore column order
-            for(int i = 0;i < columnOrder.Length;i++) {
-                string columnName = columnOrder[i];
-                if(dgvClients.Columns.Contains(columnName)) {
-                    dgvClients.Columns[columnName].DisplayIndex = i;
-                }
-            }
         }
 
         private void btnClients_Click(object sender, EventArgs e) {
@@ -59,7 +40,7 @@ namespace NHibernateExample {
             RefreshDataGrid(foundedClients);
         }
 
-        private void DgvClients_ManageClientClick(object sender, DataGridViewCellEventArgs e) {
+        private void dgvClients_ManageClientClick(object sender, DataGridViewCellEventArgs e) {
             if(e.ColumnIndex == dgvClients.Columns["Manage"].Index && e.RowIndex >= 0) {
                 Client selectedClient = dgvClients.Rows[e.RowIndex].DataBoundItem as Client;
 

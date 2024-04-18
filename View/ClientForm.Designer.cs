@@ -1,4 +1,7 @@
-﻿namespace NHibernateExample.View {
+﻿using System.Windows.Forms;
+using System;
+
+namespace NHibernateExample.View {
     partial class ClientForm {
         /// <summary>
         /// Required designer variable.
@@ -23,6 +26,8 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+
             panel1 = new Panel();
             vEmail = new TextBox();
             label3 = new Label();
@@ -33,6 +38,11 @@
             btnDelete = new Button();
             dgvBorrowedBooks = new DataGridView();
             label4 = new Label();
+            ISBN = new DataGridViewTextBoxColumn();
+            Title = new DataGridViewTextBoxColumn();
+            Author = new DataGridViewTextBoxColumn();
+            BorrowDate = new DataGridViewTextBoxColumn();
+            Return = new DataGridViewButtonColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBorrowedBooks).BeginInit();
             SuspendLayout();
@@ -112,12 +122,21 @@
             // 
             // dgvBorrowedBooks
             // 
+            dgvBorrowedBooks.AllowUserToAddRows = false;
+            dgvBorrowedBooks.AllowUserToDeleteRows = false;
+            dgvBorrowedBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBorrowedBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBorrowedBooks.Columns.AddRange(new DataGridViewColumn[] { ISBN, Title, Author, BorrowDate, Return });
+            dgvBorrowedBooks.AutoGenerateColumns = false;
+            dgvBorrowedBooks.MultiSelect = false;
             dgvBorrowedBooks.Location = new Point(17, 269);
             dgvBorrowedBooks.Name = "dgvBorrowedBooks";
+            dgvBorrowedBooks.ReadOnly = true;
             dgvBorrowedBooks.RowTemplate.Height = 25;
             dgvBorrowedBooks.Size = new Size(758, 150);
             dgvBorrowedBooks.TabIndex = 2;
+            dgvBorrowedBooks.CellFormatting += dgvBorrowedBooks_CellFormatting;
+            dgvBorrowedBooks.CellContentClick += dgvBorrowedBooks_ManageClientClick;
             // 
             // label4
             // 
@@ -127,6 +146,49 @@
             label4.Size = new Size(93, 15);
             label4.TabIndex = 3;
             label4.Text = "Borrowed books";
+            // 
+            // ISBN
+            // 
+            ISBN.DataPropertyName = "ISBN";
+            ISBN.HeaderText = "ISBN";
+            ISBN.Name = "ISBN";
+            ISBN.ReadOnly = true;
+            // 
+            // Title
+            // 
+            Title.DataPropertyName = "Title";
+            Title.HeaderText = "Title";
+            Title.Name = "Title";
+            Title.ReadOnly = true;
+            // 
+            // Author
+            // 
+            Author.DataPropertyName = "Book.Author";
+            Author.HeaderText = "Author";
+            Author.Name = "Author";
+            Author.ReadOnly = true;
+            // 
+            // BorrowDate
+            // 
+            BorrowDate.DataPropertyName = "BorrowDate";
+            BorrowDate.HeaderText = "Borrow Date";
+            BorrowDate.Name = "BorrowDate";
+            BorrowDate.ReadOnly = true;
+            // 
+            // Return
+            // 
+            Return.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.Transparent;
+            dataGridViewCellStyle2.ForeColor = Color.Gray;
+            Return.DefaultCellStyle = dataGridViewCellStyle2;
+            Return.FillWeight = 50F;
+            Return.HeaderText = "Return";
+            Return.Name = "Return";
+            Return.ReadOnly = true;
+            Return.Text = "Return";
+            Return.ToolTipText = "Return book";
+            Return.UseColumnTextForButtonValue = true;
             // 
             // ClientForm
             // 
@@ -158,5 +220,10 @@
         private Button btnDelete;
         private DataGridView dgvBorrowedBooks;
         private Label label4;
+        private DataGridViewTextBoxColumn ISBN;
+        private DataGridViewTextBoxColumn Title;
+        private DataGridViewTextBoxColumn Author;
+        private DataGridViewTextBoxColumn BorrowDate;
+        private DataGridViewButtonColumn Return;
     }
 }
