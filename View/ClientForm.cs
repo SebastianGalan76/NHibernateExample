@@ -17,13 +17,17 @@ namespace NHibernateExample.View {
 
             mClientContainer = clientContainer;
             mBookContainer = bookContainer;
-            if(client.Borrows != null && client.Borrows.Count > 0) {
-                dgvBorrowedBooks.AutoGenerateColumns = false;
-                dgvBorrowedBooks.DataSource = client.Borrows.Where(b => !b.IsReturned()).ToList();
-            }
-
             btnSaveChanges.Visible = false;
             btnCancelChanges.Visible = false;
+
+            RefreshBorrowedBooks();
+        }
+
+        public void RefreshBorrowedBooks() {
+            if(mClient.Borrows != null && mClient.Borrows.Count > 0) {
+                dgvBorrowedBooks.AutoGenerateColumns = false;
+                dgvBorrowedBooks.DataSource = mClient.Borrows.Where(b => !b.IsReturned()).ToList();
+            }
         }
 
         private void UpdateClient() {
@@ -56,7 +60,7 @@ namespace NHibernateExample.View {
         }
 
         private void btnBorrow_Click(object sender, EventArgs e) {
-            BorrowBookForm form = new BorrowBookForm(mClient, mBookContainer);
+            BorrowBookForm form = new BorrowBookForm(mClient, mBookContainer, this);
             form.ShowDialog();
         }
 
@@ -81,7 +85,7 @@ namespace NHibernateExample.View {
             }
         }
 
-        private void dgvBorrowedBooks_ManageClientClick(object sender, DataGridViewCellEventArgs e) {
+        private void dgvBorrowedBooks_ReturnBookClick(object sender, DataGridViewCellEventArgs e) {
             if(e.ColumnIndex == dgvBorrowedBooks.Columns["Return"].Index && e.RowIndex >= 0) {
                 Borrow selectedBorrowObj = dgvBorrowedBooks.Rows[e.RowIndex].DataBoundItem as Borrow;
 
@@ -92,7 +96,7 @@ namespace NHibernateExample.View {
                     if(mClient.Borrows != null && mClient.Borrows.Count > 0) {
                         dgvBorrowedBooks.DataSource = mClient.Borrows.Where(b => !b.IsReturned()).ToList();
                     }
-                    MessageBox.Show("The book has been returned.", "OK");
+                    MessageBox.Show("The book has been returned!", "OK");
                 }
             }
         }

@@ -45,7 +45,7 @@ namespace NHibernateExample.View {
                     e.FormattingApplied = true;
                 }
             } else if(dgvBorrowHistory.Columns[e.ColumnIndex].Name == "Email" && e.Value == null) {
-                if(borrow != null && borrow.Client!= null) {
+                if(borrow != null && borrow.Client != null) {
                     e.Value = borrow.Client.Email;
                     e.FormattingApplied = true;
                 }

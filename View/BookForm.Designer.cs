@@ -39,6 +39,7 @@
             Email = new DataGridViewTextBoxColumn();
             BorrowDate = new DataGridViewTextBoxColumn();
             ReturnDate = new DataGridViewTextBoxColumn();
+            label5 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBorrowHistory).BeginInit();
             SuspendLayout();
@@ -147,16 +148,15 @@
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
             // 
-            // dataGridView1
+            // dgvBorrowHistory
             // 
             dgvBorrowHistory.AllowUserToAddRows = false;
             dgvBorrowHistory.AllowUserToDeleteRows = false;
             dgvBorrowHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBorrowHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBorrowHistory.Columns.AddRange(new DataGridViewColumn[] { FirstName, LastName, Email, BorrowDate, ReturnDate });
-            dgvBorrowHistory.AutoGenerateColumns = false;
             dgvBorrowHistory.Location = new Point(12, 243);
-            dgvBorrowHistory.Name = "dataGridView1";
+            dgvBorrowHistory.Name = "dgvBorrowHistory";
             dgvBorrowHistory.ReadOnly = true;
             dgvBorrowHistory.RowTemplate.Height = 25;
             dgvBorrowHistory.Size = new Size(765, 195);
@@ -183,23 +183,33 @@
             // 
             // BorrowDate
             // 
+            BorrowDate.DataPropertyName = "BorrowDate";
             BorrowDate.HeaderText = "Borrow Date";
             BorrowDate.Name = "BorrowDate";
             BorrowDate.ReadOnly = true;
-            BorrowDate.DataPropertyName = "BorrowDate";
             // 
             // ReturnDate
             // 
+            ReturnDate.DataPropertyName = "ReturnDate";
             ReturnDate.HeaderText = "Return Date";
             ReturnDate.Name = "ReturnDate";
             ReturnDate.ReadOnly = true;
-            ReturnDate.DataPropertyName = "ReturnDate";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 225);
+            label5.Name = "label5";
+            label5.Size = new Size(86, 15);
+            label5.TabIndex = 3;
+            label5.Text = "Borrow History";
             // 
             // BookForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label5);
             Controls.Add(dgvBorrowHistory);
             Controls.Add(btnDelete);
             Controls.Add(panel1);
@@ -209,6 +219,7 @@
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBorrowHistory).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -229,5 +240,6 @@
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn BorrowDate;
         private DataGridViewTextBoxColumn ReturnDate;
+        private Label label5;
     }
 }

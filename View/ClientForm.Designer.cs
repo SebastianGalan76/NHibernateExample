@@ -163,7 +163,7 @@ namespace NHibernateExample.View {
             dgvBorrowedBooks.RowTemplate.Height = 25;
             dgvBorrowedBooks.Size = new Size(758, 150);
             dgvBorrowedBooks.TabIndex = 2;
-            dgvBorrowedBooks.CellContentClick += dgvBorrowedBooks_ManageClientClick;
+            dgvBorrowedBooks.CellContentClick += dgvBorrowedBooks_ReturnBookClick;
             dgvBorrowedBooks.CellFormatting += dgvBorrowedBooks_CellFormatting;
             // 
             // ISBN
