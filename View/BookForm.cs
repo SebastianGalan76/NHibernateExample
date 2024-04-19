@@ -26,7 +26,7 @@ namespace NHibernateExample.View {
                 }
 
                 cbAvailable.Checked = available;
-
+                dgvBorrowHistory.AutoGenerateColumns = false;
                 dgvBorrowHistory.DataSource = book.Borrows;
             }
         }

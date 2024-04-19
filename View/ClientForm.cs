@@ -87,7 +87,7 @@ namespace NHibernateExample.View {
 
         private void dgvBorrowedBooks_ReturnBookClick(object sender, DataGridViewCellEventArgs e) {
             if(e.ColumnIndex == dgvBorrowedBooks.Columns["Return"].Index && e.RowIndex >= 0) {
-                Borrow selectedBorrowObj = dgvBorrowedBooks.Rows[e.RowIndex].DataBoundItem as Borrow;
+                Borrow? selectedBorrowObj = dgvBorrowedBooks.Rows[e.RowIndex].DataBoundItem as Borrow;
 
                 if(selectedBorrowObj != null) {
                     selectedBorrowObj.Return();

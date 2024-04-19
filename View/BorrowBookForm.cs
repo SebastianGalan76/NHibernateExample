@@ -57,7 +57,7 @@ namespace NHibernateExample.View {
 
         private void dgvAvailableBooks_SelectBookClick(object sender, DataGridViewCellEventArgs e) {
             if(e.ColumnIndex == dgvAvailableBooks.Columns["Borrow"].Index && e.RowIndex >= 0) {
-                Book selectedBook = dgvAvailableBooks.Rows[e.RowIndex].DataBoundItem as Book;
+                Book? selectedBook = dgvAvailableBooks.Rows[e.RowIndex].DataBoundItem as Book;
 
                 if(selectedBook != null) {
                     Borrow borrow = new Borrow() {

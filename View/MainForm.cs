@@ -64,7 +64,7 @@ namespace NHibernateExample {
 
         private void dgvClients_ManageClientClick(object sender, DataGridViewCellEventArgs e) {
             if(e.ColumnIndex == dgvClients.Columns["Client_Manage"].Index && e.RowIndex >= 0) {
-                Client selectedClient = dgvClients.Rows[e.RowIndex].DataBoundItem as Client;
+                Client? selectedClient = dgvClients.Rows[e.RowIndex].DataBoundItem as Client;
 
                 if(selectedClient != null) {
                     ClientForm form = new ClientForm(selectedClient, mClientContainer, mBookContainer);
@@ -74,7 +74,7 @@ namespace NHibernateExample {
         }
         private void dgvBooks_ManageBookClick(object sender, DataGridViewCellEventArgs e) {
             if(e.ColumnIndex == dgvBooks.Columns["Book_Manage"].Index && e.RowIndex >= 0) {
-                Book selectedBook = dgvBooks.Rows[e.RowIndex].DataBoundItem as Book;
+                Book? selectedBook = dgvBooks.Rows[e.RowIndex].DataBoundItem as Book;
 
                 if(selectedBook != null) {
                     BookForm form = new BookForm(selectedBook, mBookContainer);
